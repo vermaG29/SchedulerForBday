@@ -1,0 +1,599 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 600px;
+    width: 90%;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.countdown-header h1 {
+    color: #2c3e50;
+    font-size: 2.5em;
+    font-weight: 600;
+    margin-bottom: 10px;
+    letter-spacing: -0.5px;
+}
+
+.countdown-subtitle {
+    color: #b08d57;
+    font-size: 1.2em;
+    font-weight: 400;
+    margin-bottom: 40px;
+}
+
+.countdown-display {
+    margin: 30px 0;
+}
+
+.days-remaining {
+    font-size: 3em;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Balloon Styling */
+.balloon-container {
+    margin: 50px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+}
+
+.balloon {
+    width: 120px;
+    height: 150px;
+    background: linear-gradient(45deg, #ff6b6b, #ee5a6f, #ff8a80);
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    animation: float 3s ease-in-out infinite;
+    box-shadow: 0 10px 20px rgba(255, 107, 107, 0.3);
+}
+
+.balloon:hover {
+    transform: scale(1.1);
+    animation-play-state: paused;
+}
+
+.balloon-string {
+    width: 2px;
+    height: 40px;
+    background: #666;
+    position: absolute;
+    bottom: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.balloon-text {
+    color: white;
+    font-weight: 600;
+    font-size: 0.9em;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+}
+
+/* Pop Animation */
+@keyframes balloonPop {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.3); }
+    100% { transform: scale(0); opacity: 0; }
+}
+
+.balloon.popping {
+    animation: balloonPop 0.6s ease-out forwards;
+}
+
+/* Message Popup */
+.message-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease;
+}
+
+.message-content {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    max-width: 500px;
+    width: 90%;
+    position: relative;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    animation: slideUp 0.4s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from { transform: translateY(30px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 2em;
+    color: #999;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close-btn:hover {
+    color: #ff6b6b;
+}
+
+.message-header {
+    font-size: 1.8em;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 20px;
+}
+
+.message-body {
+    color: #555;
+    font-size: 1.1em;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+.gift-item {
+    background: linear-gradient(45deg, #b08d57, #d4af37);
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
+    margin: 15px 0;
+    font-weight: 500;
+}
+
+.ok-btn {
+    background: linear-gradient(45deg, #b08d57, #d4af37);
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    font-size: 1.1em;
+    font-weight: 500;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.ok-btn:hover {
+    transform: translateY(-2px);
+}
+
+/* Navigation */
+.navigation {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.nav-btn {
+    background: rgba(108, 117, 125, 0.1);
+    color: #6c757d;
+    border: 2px solid rgba(108, 117, 125, 0.2);
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.nav-btn:hover {
+    background: rgba(108, 117, 125, 0.2);
+    transform: translateY(-2px);
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+    .container {
+        padding: 30px 20px;
+    }
+    
+    .countdown-header h1 {
+        font-size: 2em;
+    }
+    
+    .days-remaining {
+        font-size: 2.5em;
+    }
+    
+    .balloon {
+        width: 100px;
+        height: 130px;
+    }
+    
+    .message-content {
+        padding: 30px 20px;
+    }
+}
+.photo-gift {
+    background: linear-gradient(45deg, #ff9a9e, #fecfef);
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
+    margin: 15px 0;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 154, 158, 0.2);
+    user-select: none;
+}
+
+.photo-gift:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 154, 158, 0.3);
+    background: linear-gradient(45deg, #ff8a95, #fdb5ef);
+}
+
+.photo-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    animation: fadeIn 0.3s ease;
+}
+
+.photo-popup-content {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    max-width: 90%;
+    max-height: 90%;
+    position: relative;
+    text-align: center;
+    overflow: auto;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.close-photo-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 2.5em;
+    color: #999;
+    cursor: pointer;
+    z-index: 2001;
+    line-height: 1;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.close-photo-btn:hover {
+    color: #ff6b6b;
+    background: rgba(255, 107, 107, 0.1);
+}
+
+.collage-image {
+    max-width: 100%;
+    max-height: 70vh;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    cursor: zoom-in;
+}
+
+.collage-image:hover {
+    transform: scale(1.02);
+    transition: transform 0.3s ease;
+}
+
+.photo-caption {
+    margin-top: 15px;
+    color: #666;
+    font-size: 1.2em;
+    font-style: italic;
+    font-weight: 500;
+}
+
+/* Mobile responsive */
+@media (max-width: 480px) {
+    .photo-popup-content {
+        padding: 15px;
+        margin: 20px;
+    }
+    
+    .collage-image {
+        max-height: 60vh;
+    }
+    
+    .close-photo-btn {
+        font-size: 2em;
+        top: 5px;
+        right: 10px;
+    }
+}
+.app-gift {
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
+    margin: 15px 0;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.2);
+    user-select: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.app-gift:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+    background: linear-gradient(45deg, #5a67d8, #6b46c1);
+}
+
+.app-gift:active {
+    transform: translateY(0);
+}
+
+/* Add a subtle animation to make it more exciting */
+.app-gift::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.app-gift:hover::before {
+    left: 100%;
+}
+
+/* Popup buttons styling */
+.popup-buttons {
+    margin-top: 30px;
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.photobooth-btn {
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    color: white;
+    border: none;
+    padding: 15px 25px;
+    font-size: 1.1em;
+    font-weight: 500;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 150px;
+}
+
+.photobooth-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+}
+
+.cancel-btn {
+    background: rgba(108, 117, 125, 0.1);
+    color: #6c757d;
+    border: 2px solid rgba(108, 117, 125, 0.2);
+    padding: 13px 25px;
+    font-size: 1.1em;
+    font-weight: 500;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 120px;
+}
+
+.cancel-btn:hover {
+    background: rgba(108, 117, 125, 0.2);
+    transform: translateY(-2px);
+}
+.day5-gift {
+    background: linear-gradient(45deg, #a8e6cf, #7fcdcd);
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
+    margin: 15px 0;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(168, 230, 207, 0.2);
+    user-select: none;
+}
+
+.day5-gift:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(168, 230, 207, 0.3);
+    background: linear-gradient(45deg, #98d8c8, #6fb3d2);
+}
+.games-gift {
+    background: linear-gradient(45deg, #4ecdc4, #44a08d);
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
+    margin: 15px 0;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(78, 205, 196, 0.2);
+    user-select: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.games-gift:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(78, 205, 196, 0.3);
+    background: linear-gradient(45deg, #3fb8af, #3a8f8a);
+}
+
+.link-gift {
+    background: linear-gradient(45deg, #f093fb, #f5576c);
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
+    margin: 15px 0;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(240, 147, 251, 0.2);
+    user-select: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.link-gift:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(240, 147, 251, 0.3);
+    background: linear-gradient(45deg, #e088f7, #f04569);
+}
+
+/* Add sparkle animation for games */
+.games-gift::before {
+    content: '✨';
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    animation: sparkle 2s ease-in-out infinite;
+}
+
+@keyframes sparkle {
+    0%, 100% { opacity: 0.3; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.2); }
+}
+
+/* Games popup specific styling */
+.games-preview {
+    margin: 20px 0;
+    padding: 20px;
+    background: rgba(78, 205, 196, 0.1);
+    border-radius: 10px;
+    border-left: 4px solid #4ecdc4;
+}
+
+.game-item {
+    margin: 10px 0;
+    padding: 10px;
+    background: white;
+    border-radius: 8px;
+    color: #4ecdc4;
+    font-weight: 500;
+    box-shadow: 0 2px 10px rgba(78, 205, 196, 0.1);
+}
+
+.games-btn {
+    background: linear-gradient(45deg, #4ecdc4, #44a08d);
+    color: white;
+    border: none;
+    padding: 15px 25px;
+    font-size: 1.1em;
+    font-weight: 500;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 150px;
+}
+
+.games-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(78, 205, 196, 0.3);
+}
+.food-gift {
+    background: linear-gradient(45deg, #ff8a65, #ff7043);
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
+    margin: 15px 0;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 138, 101, 0.2);
+    user-select: none;
+    position: relative;
+    overflow: hidden;
+    border: 2px solid rgba(255, 138, 101, 0.3);
+}
+
+.food-gift:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 138, 101, 0.4);
+    background: linear-gradient(45deg, #ff7043, #ff5722);
+}
+
+/* Add food emoji animation */
+.food-gift::after {
+    content: '🍽️';
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    animation: foodFloat 2s ease-in-out infinite;
+}
+
+@keyframes foodFloat {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-3px) rotate(-5deg); }
+}
+
+/* Special styling for food gift card popup */
+.photo-popup-content h3 {
+    color: #ff7043;
+    margin-bottom: 20px;
+    font-size: 1.8em;
+}

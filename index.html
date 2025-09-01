@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Countdown!</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="welcome-section">
+            <h1> YOUR BIRTHDAY IS ALMOST HERE</h1>
+                      
+            <div class="welcome-message">
+                <h2>HEYYYY!!!!!</h2>
+                <p>It's your birthday week. Are you excited?🎉</p>
+                <p>Get ready for little surprises. The only catch - you need to come here at least once every day till your birthday</p>
+            </div>
+            
+            <button class="continue-btn" onclick="showSecurityQuestions()">
+                Let's Start! 🎁
+            </button>
+        </div>
+
+        <!-- Security Questions Section (initially hidden) -->
+        <div class="security-section" id="securitySection" style="display: none;">
+            <h2> But are you really YOU? Security is hot these days.</h2>
+            <p>You gotta answer the following questions now. Consider this a fun little quiz.</p>
+            <div class="question-container">
+                <div class="question">
+                    <label>Where did we drink those super filling beverages after we roamed around Gateway Of India?</label>
+                    <input type="text" id="answer1" placeholder="Your answer...">
+                </div>
+                
+                <div class="question">
+                    <label>Where did we have the best coffee and garlic bread that we remember till today? (Hint:Bandstand)</label>
+                    <input type="text" id="answer2" placeholder="Your answer...">
+                </div>
+                
+                <div class="question">
+                    <label>Which place did we visit twice when you were in Delhi?</label>
+                    <input type="text" id="answer3" placeholder="Your answer...">
+                </div>
+            </div>
+            
+            <button class="submit-btn" onclick="checkAnswers()">
+                Submit Answers ✨
+            </button>
+            
+            <p class="attempts" id="attemptsText">Attempts remaining: 3</p>
+            <p class="error-message" id="errorMessage" style="display: none;"></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

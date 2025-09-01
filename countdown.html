@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birthday Countdown - Day by Day</title>
+    <link rel="stylesheet" href="countdown.css">
+</head>
+<body>
+    <div class="container">
+        <header class="countdown-header">
+            <h1>🎂 Birthday Countdown 🎂</h1>
+            <p class="countdown-subtitle">Your special week has begun!</p>
+        </header>
+
+        <div class="countdown-display">
+            <div class="days-remaining" id="daysRemaining">
+                <!-- This will be updated by JavaScript -->
+            </div>
+        </div>
+
+        <div class="balloon-container">
+            <div class="balloon" id="dailyBalloon" onclick="popBalloon()">
+                <div class="balloon-string"></div>
+                <div class="balloon-text" id="balloonText">
+                    Click me!
+                </div>
+            </div>
+        </div>
+
+        <!-- Message popup (initially hidden) -->
+        <div class="message-popup" id="messagePopup" style="display: none;">
+            <div class="message-content">
+                <button class="close-btn" onclick="closeMessage()">×</button>
+                <div class="message-header" id="messageHeader">
+                    <!-- Day-specific header -->
+                </div>
+                <div class="message-body" id="messageBody">
+                    <!-- Day-specific message and gifts -->
+                </div>
+                <div class="message-footer">
+                    <button class="ok-btn" onclick="closeMessage()">Got it! ❤️</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="navigation">
+            <button class="nav-btn" onclick="goHome()">Back to Home</button>
+            <button class="nav-btn" onclick="showAllDays()" id="showAllBtn" style="display: none;">
+                View All Days
+            </button>
+        </div>
+    </div>
+
+    <script src="countdownscript.js"></script>
+</body>
+</html>
