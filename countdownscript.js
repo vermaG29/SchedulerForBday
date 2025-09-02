@@ -50,27 +50,46 @@ let balloonPopped = false;
 
 // Initialize the page
 function initializePage() {
-    currentDay = calculateDaysRemaining();
-    updateDisplay();
+   currentDay = calculateDaysRemaining();
+    console.log('Current day:', currentDay); // Debug
     
-    // Check if balloon was already popped today
+    updateDisplay();
+    resetBalloonForDay();
+    
+    // Check if today's balloon was already popped
     const today = new Date().toDateString();
     const lastPoppedDate = localStorage.getItem('lastPoppedDate');
     
     if (lastPoppedDate === today) {
         balloonPopped = true;
-        hideBalloon();
+        showTodaysMessage(); // Show the message without animation
     }
 }
 
 function calculateDaysRemaining() {
     const today = new Date();
-    const timeDiff = BIRTHDAY_DATE.getTime() - today.getTime();
+    today.setHours(0, 0, 0, 0); // Reset time to start of day
+    
+    const birthday = new Date(BIRTHDAY_DATE);
+    birthday.setHours(0, 0, 0, 0); // Reset time to start of day
+    
+    const timeDiff = birthday.getTime() - today.getTime();
     const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
     
-    // Return 0 if it's the birthday, otherwise return days remaining (max 7)
-    if (daysDiff <= 0) return 0;
-    return Math.min(daysDiff, 7);
+    // Return days remaining (0 = birthday, 1-7 = countdown days)
+    if (daysDiff <= 0) return 0; // It's the birthday!
+    if (daysDiff > 7) return 7;  // More than 7 days = show day 7
+    return daysDiff;
+}
+// Reset balloon visibility for the current day
+function resetBalloonForDay() {
+    const balloon = document.getElementById('dailyBalloon');
+    if (balloon) {
+        balloon.style.display = 'block';
+        balloon.style.opacity = '1';
+        balloon.classList.remove('popping');
+        balloonPopped = false;
+    }
 }
 
 function updateDisplay() {
@@ -79,51 +98,63 @@ function updateDisplay() {
     
     if (currentDay === 0) {
         daysElement.textContent = "🎂 IT'S YOUR BIRTHDAY! 🎂";
+    const daysElement = document.getElementById('daysRemaining');
+    const balloonText = document.getElementById('balloonText');
+    const balloon = document.getElementById('dailyBalloon');
+    
+    if (currentDay === 0) {
+        daysElement.textContent = "🎂 IT'S YOUR BIRTHDAY! 🎂";
         balloonText.textContent = "Birthday Surprise!";
+        balloon.style.background = 'linear-gradient(45deg, #ffd700, #ffed4e, #fff59d)';
     } else {
         daysElement.textContent = `${currentDay} Day${currentDay === 1 ? '' : 's'} to Go!`;
-        balloonText.textContent = `Day ${8 - currentDay}`;
+        balloonText.textContent = `Day ${8 - currentDay} Gift`;
+        
+        // Different colors for different days
+        if (currentDay <= 2) {
+            balloon.style.background = 'linear-gradient(45deg, #ff6b6b, #ee5a6f, #ff8a80)';
+        } else if (currentDay <= 4) {
+            balloon.style.background = 'linear-gradient(45deg, #4ecdc4, #44a08d, #73d0c4)';
+        } else {
+            balloon.style.background = 'linear-gradient(45deg, #a8e6cf, #7fcdcd, #81c784)';
+        }
     }
-    
-    // Change balloon color based on days remaining
-    const balloon = document.getElementById('dailyBalloon');
-    if (currentDay === 0) {
-        balloon.style.background = 'linear-gradient(45deg, #ffd700, #ffed4e, #fff59d)';
-    } else if (currentDay <= 2) {
-        balloon.style.background = 'linear-gradient(45deg, #ff6b6b, #ee5a6f, #ff8a80)';
-    } else if (currentDay <= 4) {
-        balloon.style.background = 'linear-gradient(45deg, #4ecdc4, #44a08d, #73d0c4)';
-    } else {
-        balloon.style.background = 'linear-gradient(45deg, #a8e6cf, #7fcdcd, #81c784)';
-    }
+}
 }
 
 function popBalloon() {
-    if (balloonPopped) return;
+    if (balloonPopped) {
+        // If already popped, just show the message again
+        showTodaysMessage();
+        return;
+    }
+    
+    console.log('Popping balloon for day:', currentDay); // Debug
     
     const balloon = document.getElementById('dailyBalloon');
     balloon.classList.add('popping');
     
-    // Play pop sound if you want to add audio later
-    // new Audio('assets/pop-sound.mp3').play();
-    
     setTimeout(() => {
-        hideBalloon();
-        showDailyMessage();
+        balloon.style.display = 'none';
+        showTodaysMessage();
         
-        // Mark balloon as popped for today
+        // Mark today's balloon as popped
         const today = new Date().toDateString();
         localStorage.setItem('lastPoppedDate', today);
         balloonPopped = true;
     }, 600);
 }
 
-function hideBalloon() {
-    document.getElementById('dailyBalloon').style.display = 'none';
-}
-
-function showDailyMessage() {
+// Show today's specific message
+function showTodaysMessage() {
     const content = DAILY_CONTENT[currentDay];
+    
+    if (!content) {
+        console.error('No content found for day:', currentDay);
+        return;
+    }
+    
+    console.log('Showing message for day:', currentDay); // Debug
     
     document.getElementById('messageHeader').textContent = content.header;
     
@@ -132,7 +163,13 @@ function showDailyMessage() {
     if (content.gifts && content.gifts.length > 0) {
         messageHTML += '<h4 style="margin: 20px 0 10px 0; color: #b08d57;">Today\'s Gifts:</h4>';
         content.gifts.forEach(gift => {
-            messageHTML += `<div class="gift-item">${gift}</div>`;
+            if (gift.includes('<div')) {
+                // It's an HTML gift (clickable)
+                messageHTML += gift;
+            } else {
+                // It's a regular text gift
+                messageHTML += `<div class="gift-item">${gift}</div>`;
+            }
         });
     }
     
@@ -140,6 +177,7 @@ function showDailyMessage() {
     document.getElementById('messagePopup').style.display = 'flex';
 }
 
+// Close message popup
 function closeMessage() {
     document.getElementById('messagePopup').style.display = 'none';
 }
@@ -418,4 +456,20 @@ function handleBirthdayCardError(img) {
         img.style.display = 'none';
         img.parentElement.innerHTML += '<p style="color: red;">Birthday card image not found. Check if HBD.png exists in assets folder.</p>';
     }
+}
+function debugBalloon() {
+    const balloon = document.getElementById('dailyBalloon');
+    console.log('Balloon element:', balloon);
+    
+    if (balloon) {
+        balloon.style.display = 'block';
+        balloon.style.visibility = 'visible';
+        balloon.style.opacity = '1';
+        console.log('Balloon should now be visible');
+    } else {
+        console.log('ERROR: Balloon element not found!');
+    }
+    
+    balloonPopped = false;
+    localStorage.removeItem('lastPoppedDate');
 }

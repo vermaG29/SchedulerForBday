@@ -61,9 +61,11 @@ body {
     justify-content: center;
     align-items: center;
     height: 200px;
+    position: relative;
 }
 
 .balloon {
+    z-index: 10; /* Make sure it's on top */
     width: 120px;
     height: 150px;
     background: linear-gradient(45deg, #ff6b6b, #ee5a6f, #ff8a80);
@@ -73,6 +75,8 @@ body {
     transition: all 0.3s ease;
     animation: float 3s ease-in-out infinite;
     box-shadow: 0 10px 20px rgba(255, 107, 107, 0.3);
+    display: block !important; /* Force display */
+   
 }
 
 .balloon:hover {
