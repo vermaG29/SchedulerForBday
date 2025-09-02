@@ -1,5 +1,5 @@
 // Set your friend's birthday date here (YYYY, MM-1, DD) - Month is 0-indexed
-const BIRTHDAY_DATE = new Date(2025, 9, 9); // Example: September 5, 2025
+const BIRTHDAY_DATE = new Date(2025, 8, 9); // Example: September 5, 2025
 
 // Daily messages and gifts
 const DAILY_CONTENT = {
