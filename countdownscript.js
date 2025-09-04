@@ -256,7 +256,7 @@ function openDay5Image() {
     popup.innerHTML = `
         <div class="photo-popup-content">
             <button class="close-photo-btn" onclick="closePhotoPopup()">&times;</button>
-            <img src="assets/Nykaa1.png" alt="Day 5 Special Image" class="giftcard1-image" onerror="handleDay5ImageError(this)">
+            <img src="assets/Nykaa1.jpg" alt="Day 5 Special Image" class="giftcard1-image" onerror="handleDay5ImageError(this)">
             <p class="photo-caption">💖 Something special for day 5! 💖</p>
         </div>
     `;
@@ -331,8 +331,8 @@ function openDay3GiftCard() {
     popup.innerHTML = `
         <div class="photo-popup-content">
             <button class="close-photo-btn" onclick="closePhotoPopup()">&times;</button>
-            <h3>🎁 Your Special Gift Card! 🎁</h3>
-            <img src="assets/Nykaa2.png" alt="Special Gift Card" class="collage-image" onerror="handleDay3ImageError(this)">
+            <h3>🎁 Double the fun! 🎁</h3>
+            <img src="assets/Nykaa2.jpg" alt="Special Gift Card" class="collage-image" onerror="handleDay3ImageError(this)">
             <p class="photo-caption">We gotta do it time to time. </p>
         </div>
     `;
@@ -365,7 +365,7 @@ function openFoodGiftCard() {
         <div class="photo-popup-content">
             <button class="close-photo-btn" onclick="closePhotoPopup()">&times;</button>
             <h3>🍕 Your Food Gift Card! 🎉</h3>
-            <img src="assets/Zomato.png" alt="Food App Gift Card" class="collage-image" onerror="handleFoodCardError(this)">
+            <img src="assets/Zomato.jpg" alt="Food App Gift Card" class="collage-image" onerror="handleFoodCardError(this)">
             <p class="photo-caption">Because when everything fails, good food works</p>
         </div>
     `;
