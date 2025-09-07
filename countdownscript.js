@@ -398,7 +398,7 @@ function openGroceryGiftCard() {
         <div class="photo-popup-content">
             <button class="close-photo-btn" onclick="closePhotoPopup()">&times;</button>
             <h3>Your Grocery Gift Card 🎉</h3>
-            <img src="assets/JioMart.png" alt="Food App Gift Card" class="collage-image" onerror="handleGroceryCardError(this)">
+            <img src="assets/BlinkIt.jpg" alt="Food App Gift Card" class="collage-image" onerror="handleGroceryCardError(this)">
             <p class="photo-caption">For when you cannot make a run to the store</p>
         </div>
     `;
